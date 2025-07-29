@@ -12,7 +12,7 @@ api.get('/', (req, res) =>{
     });
 });
 
-// TODO: Regustrar todas las rutas
+// TODO: Registrar todas las rutas
 api.use("/api/auth", authRouter);
 api.use("/api/cart", cartRouter);
 api.use("/api/orders", orderRouter);
