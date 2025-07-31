@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { register } from '../services/auth.service';
 
 
 const Register = () => {
@@ -12,7 +13,31 @@ const Register = () => {
     });
 
     const handleChange = (e) => {
-
+        const { name, value } = e.target;
+        setFormData((prevData) => {
+            return {
+                ...prevData,
+                [name]: value,
+            };
+        });
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        try {
+           const response = await register(
+            formData.firstName,
+            formData.lastName,
+            formData.email,
+            formData.password
+        );
+            console.log(response);
+            // Handle successful registration, e.g., redirect to login or show a success message    
+        } catch (error) {
+            console.log(error);
+            // Handle error appropriately, e.g., show a message to the user
+        }
+        
     };
 
   return <div>
@@ -63,7 +88,7 @@ const Register = () => {
                 placeholder="Ingresa tu contraseña"
             />
         </div>
-      <button type="submit">Registrar</button>
+      <button onClick={handleSubmit} type="submit">Registrar</button>
     </form>
   </div>;
 }
